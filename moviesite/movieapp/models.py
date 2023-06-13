@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Movie(models.Model):
@@ -13,7 +14,7 @@ class Movie(models.Model):
         (RUB, 'Rubles')
         ]
     name = models.CharField(max_length=40)
-    rating = models.IntegerField()
+    rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)])
     year = models.IntegerField(null=True, blank=True)
     budget = models.IntegerField(null=True)
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=RUB)
