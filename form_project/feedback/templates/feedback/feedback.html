@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h2>Оставьте отзыв</h2>
+  <form action="/" method="post">
+      {% csrf_token %}
+      <label for="name_id">Имя:</label>
+      <input type="text" id="name_id" name="name"><br><br>
+      <label for="surname_id">Фамилия:</label>
+      <input type="text" id="surname_id" name="surname"><br><br>
+      <label for="feedback_id">Отзыв:</label>
+      <textarea name="feedback" id="feedback_id" cols="30" rows="10"></textarea><br>
+      <button type="submit">Отправить</button>
+  </form>
+</body>
+</html>
