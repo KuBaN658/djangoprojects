@@ -9,14 +9,7 @@ def index(request):
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
-            feed = Feedback(
-                name=form.cleaned_data['name'],
-                surname=form.cleaned_data['surname'],
-                feedback=form.cleaned_data['feedback'],
-                rating=form.cleaned_data['rating'],
-            )
-            feed.save()
+            form.save()
             return HttpResponseRedirect('/done')
     else:
         form = FeedbackForm()
