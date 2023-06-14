@@ -4,6 +4,14 @@ from django.utils.text import slugify
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
+class DressingRoom(models.Model):
+    floor = models.IntegerField()
+    number = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.floor} {self.number}'
+
+
 class Director(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -25,6 +33,7 @@ class Actor(models.Model):
     ]
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    dressing = models.OneToOneField(DressingRoom, on_delete=models.SET_NULL, null=True, blank=True)
     gender = models.CharField(max_length=1, choices=GENDERS, default=MALE)
     slug = models.SlugField(default='',
                             null=False,
@@ -60,7 +69,7 @@ class Movie(models.Model):
                             null=False,
                             db_index=True,
                             blank=True)# для быстрого поиска в DB
-    director = models.ForeignKey(Director, on_delete=models.PROTECT, null=True)
+    director = models.ForeignKey(Director, on_delete=models.PROTECT, null=True, related_name='movies')
     actors = models.ManyToManyField(Actor)
 
     def get_url(self):

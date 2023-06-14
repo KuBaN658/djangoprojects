@@ -1,9 +1,14 @@
 from django.contrib import admin, messages
-from .models import Movie, Director, Actor
+from .models import Movie, Director, Actor, DressingRoom
 from django.db.models import QuerySet
 
 
 admin.site.register(Director)
+
+
+@admin.register(DressingRoom)
+class DressingRoomAdmin(admin.ModelAdmin):
+    list_display = ['number', 'floor', 'actor']
 
 
 @admin.register(Actor)
