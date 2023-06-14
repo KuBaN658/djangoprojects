@@ -26,9 +26,17 @@ class Actor(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     gender = models.CharField(max_length=1, choices=GENDERS, default=MALE)
+    slug = models.SlugField(default='',
+                            null=False,
+                            db_index=True,
+                            blank=True)
+
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.last_name + self.first_name)
+    #     super(Actor, self).save(*args, **kwargs)
 
     def get_url(self):
-        return reverse('director-detail', args=[self.id])
+        return reverse('actor-detail', args=[self.slug])
 
     def __str__(self):
         label = 'Актер' if self.gender == self.MALE else 'Актриса'

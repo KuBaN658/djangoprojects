@@ -4,7 +4,14 @@ from django.db.models import QuerySet
 
 
 admin.site.register(Director)
-admin.site.register(Actor)
+
+
+@admin.register(Actor)
+class ActorAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('first_name', 'last_name')}
+    list_display = ['first_name', 'last_name', 'slug']
+
+
 
 class RatingFilter(admin.SimpleListFilter):
     title = 'Фильтр по рейтингу'
@@ -24,9 +31,6 @@ class RatingFilter(admin.SimpleListFilter):
             return queryset.filter(rating__lte=80)
         if self.value() == '>80':
             return queryset.filter(rating__gt=80)
-
-
-
 
 
 @admin.register(Movie)
