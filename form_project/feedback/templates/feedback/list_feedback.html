@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Все отзывы
+{% endblock %}
+
+{% block content %}
+<ol>
+  {% for feedback in feedbacks %}
+    <li>
+        <h2>
+        id - {{ feedback.id }}
+        Имя - {{ feedback.name }}
+        Оценка - {{ feedback.rating }}
+        </h2>
+    </li>
+  {% endfor %}
+</ol>
+{% endblock %}
