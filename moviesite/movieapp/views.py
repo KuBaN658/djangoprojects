@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Movie, Director, Actor
 from django.db.models import F, Avg, Min, Max
+from django.views.generic import ListView
 
 
 
@@ -24,6 +25,17 @@ def show_one_movie(request, slug_movie: str):
     })
 
 
+class ListDirectors(ListView):
+    template_name = 'movieapp/all_directors.html'
+    model = Director
+    context_object_name = 'directors'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total'] = Director.objects.all().count()
+        return context
+
+
 def show_all_directors(request):
     directors = Director.objects.order_by(F('first_name').asc(nulls_last=True))
     total = directors.count()
@@ -39,6 +51,16 @@ def show_one_director(request, id_director: int):
         'director': director,
     })
 
+
+class ListActors(ListView):
+    template_name = 'movieapp/all_actors.html'
+    model = Actor
+    context_object_name = 'actors'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['total'] = Actor.objects.all().count()
+        return context
 
 def show_all_actors(request):
     actors = Actor.objects.order_by(F('first_name').asc(nulls_last=True))
