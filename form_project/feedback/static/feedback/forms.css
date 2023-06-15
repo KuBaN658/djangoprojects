@@ -74,5 +74,5 @@ button:active {
 }
 
 .errors label{
- color: #000;
+ color: red;
 }

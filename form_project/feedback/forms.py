@@ -16,7 +16,9 @@ class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
         # fields = ['name', 'rating', 'surname', 'feedback']
+        # exclude = ['rating']
         fields = '__all__'
+
         labels = {
             'name': 'Имя',
             'surname': 'Фамилия',
@@ -28,5 +30,8 @@ class FeedbackForm(forms.ModelForm):
                 'max_length': '* ой как много символов',
                 'min_length': '* ой как мало символов',
                 'required': '* поле не должно быть пустым',
+            },
+            'rating': {
+                'max_value': '* Значение должно быть меньше 6',
             }
         }
