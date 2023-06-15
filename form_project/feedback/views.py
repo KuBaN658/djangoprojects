@@ -4,7 +4,7 @@ from .forms import FeedbackForm
 from .models import Feedback
 from django.views import View
 from django.views.generic.base import TemplateView
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 
 class FeedBackView(View):
@@ -64,14 +64,20 @@ class ListFeedBack(ListView):
         return filter_qs
 
 
-class DetailFeedBack(TemplateView):
+# class DetailFeedBack(TemplateView):
+#     template_name = 'feedback/detail_feedback.html'
+#
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['feedback'] = Feedback.objects.get(id=kwargs['id_feedback'])
+#         return context
+
+
+class DetailFeedBack(DetailView):
     template_name = 'feedback/detail_feedback.html'
-
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['feedback'] = Feedback.objects.get(id=kwargs['id_feedback'])
-        return context
+    model = Feedback
+    context_object_name = 'feedback'
 
 
 def index(request):
