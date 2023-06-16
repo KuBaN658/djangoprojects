@@ -12,6 +12,7 @@ from .models import Feedback
 #     feedback = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 20}))
 #     rating = forms.IntegerField(label='Рейтинг',min_value=0, max_value=5)
 
+
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
