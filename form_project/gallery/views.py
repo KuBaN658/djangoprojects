@@ -4,6 +4,13 @@ from .forms import GalleryUploadForm
 from django.http import HttpResponseRedirect
 from .models import Gallery
 from django.views.generic.edit import CreateView
+from django.views.generic import ListView
+
+
+class ListGallery(ListView):
+    model = Gallery
+    template_name = 'gallery/list_file.html'
+    context_object_name = 'records'
 
 #
 # def storage_file(file):
